@@ -1,0 +1,21 @@
+FROM openjdk:8
+RUN apt-get update && apt-get install openjfx -y
+VOLUME /tmp
+ENV TZ=Europe/Warsaw
+RUN mkdir -p /tmp/static/ /resources/ /tmp/log/mr /IMPORT
+
+EXPOSE 8080
+EXPOSE 8000
+
+#VOLUME /home/kuba/workspace/mr/blik_env/docker/mr/application/config/dev.application.yml:/dev.application.yml
+#VOLUME /home/kuba/workspace/mr/blik_env/docker/mr/application/config/resources:/resources
+#VOLUME /home/kuba/workspace/mr/blik_env/docker/mr/../../../blik_mr/build/libs/mr-app.jar:/mr-app.jar
+#VOLUME /home/kuba/workspace/mr/blik_env/docker/mr/../../../blik_mr/log/mr:/tmp/log/mr
+#VOLUME /home/kuba/workspace/mr/blik_env/docker/mr/../../../blik_mr/IMPORT:/IMPORT
+
+CMD chmod 600 /resources/*
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && sh -c 'touch /rdlb-orders.jar'
+#CMD sleep 3600
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.config.location=file:/application.yml","-Xdebug","-Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n","-jar","/mr-app.jar"]
+
+
