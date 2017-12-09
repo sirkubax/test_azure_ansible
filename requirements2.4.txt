@@ -13,4 +13,3 @@ packaging
 msrestazure
 azure-cli
 ansible[azure]
--e .
