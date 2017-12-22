@@ -21,7 +21,8 @@ RUN ls -lah
 RUN ls -lah environment.sh.2.4
 #RUN source environment.sh.2.4
 
-RUN /bin/bash -c "source environment.sh.2.4"
+#RUN /bin/bash -c "rm -rf venv2.4"
+RUN /bin/bash -c "rm -rf venv2.4; source environment.sh.2.4"
 #RUN mkdir /root/.azure/ || true
 
 #CMD chmod 600 /resources/*

@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR=`pwd`
+DIR=$HOME
 
 #docker stop mr-application
 #docker rm mr-application
